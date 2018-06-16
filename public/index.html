@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>List of books</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <!-- Bootstrap -->
+  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Application Stylesheets -->
+  <link href="/stylesheets/style.css" rel="stylesheet">
+</head>
+<body>
+	<h1>List of Books</h1>
+	<ul class="allbooks">
+	</ul>
+	<script type="text/javascript">
+		$.getJSON('/list', function(data) {
+    	var list = $(".allbooks");
+    	data.books.forEach(function(value){
+    		list.append("<li>" + value.title + "</li>");
+    	});
+		});
+	</script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+</body>
+</html>
