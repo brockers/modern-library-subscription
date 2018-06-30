@@ -15,7 +15,7 @@
 	<ul class="allbooks">
 	</ul>
 	<script type="text/javascript">
-		$.getJSON('/list', function(data) {
+		$.getJSON('/books/list', function(data) {
     	var list = $(".allbooks");
     	data.books.forEach(function(value){
     		list.append("<li>" + value.title + "</li>");

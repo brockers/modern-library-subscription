@@ -15,9 +15,18 @@ db.once('open', function() {
 var Books = require('../models/books')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/list', function(req, res, next) {
 	Books.find({}).exec(function(err, books) {
 		res.json({books: books});
+	});
+});
+
+router.post('/add/:name/:auth', function(req, res, next) {
+	Books.insert({
+		title: name,
+		author: auth
+	}).exec(function(err, books) {
+		res.json({status: success});
 	});
 });
 

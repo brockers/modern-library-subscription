@@ -3,25 +3,36 @@
 <head>
 	<title>Add a books</title>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-  <!-- Bootstrap -->
-  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+	crossorigin="anonymous"></script>
+	<!-- Bootstrap -->
+	<link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Application Stylesheets -->
-  <link href="/stylesheets/style.css" rel="stylesheet">
+	<!-- Application Stylesheets -->
+	<link href="/stylesheets/style.css" rel="stylesheet">
 </head>
 <body>
-	<h1>List of Books</h1>
-	<ul class="allbooks">
-	</ul>
+	<h1>Add Books</h1>
+		<form id="target" action="destination.html">
+			<input id="bName" type="text" placeholder="Book Title">
+			<input id="bAuth" type="text" placeholder="Book Author">
+			<input type="submit" value="Go">
+		</form>
 	<script type="text/javascript">
-		$.getJSON('/list', function(data) {
-    	var list = $(".allbooks");
-    	data.books.forEach(function(value){
-    		list.append("<li>" + value.title + "</li>");
-    	});
+		$( "#target" ).submit(function( event ) {
+			// alert( "Handler for .submit() called." );
+			var url = '/books/add/' + $("#bName").val() + '/' + $("#bAuth").val();
+			$.ajax({
+				type: "POST",
+				url: url,
+				// data: $("#idForm").serialize(), // serializes the form's elements.
+				success: function(data)
+				{
+					 	 alert(data); // show response from the php script.
+				}
+			});
+			event.preventDefault();
 		});
 	</script>
-  <script src="/javascripts/bootstrap.min.js"></script>
+	<script src="/javascripts/bootstrap.min.js"></script>
 </body>
 </html>
