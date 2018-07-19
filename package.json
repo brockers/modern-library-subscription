@@ -12,7 +12,7 @@
     "postinstall": "cp node_modules/popper.js/dist/popper.min.* public/js/lib && cp node_modules/bootstrap/dist/js/bootstrap.min.* public/js/lib && cp node_modules/jquery/dist/jquery.min.* public/js/lib && npm rebuild node-sass",
     "start": "node app.js",
     "test": "nyc mocha --timeout=3000 --exit",
-		"db:rebuild": "mongoimport --db library_test --collection books --drop --file booklist.json",
+    "db:rebuild": "mongoimport --db library_test --collection books --drop --file booklist.json",
     "lint": "eslint **/*.js"
   },
   "dependencies": {
@@ -61,6 +61,7 @@
     "popper.js": "^1.14.3",
     "pug": "^2.0.3",
     "request": "^2.85.0",
+    "startbootstrap-grayscale": "^4.1.1",
     "stripe": "^5.8.0",
     "tumblr.js": "^1.1.1",
     "twilio": "^3.16.0",

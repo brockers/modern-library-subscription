@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/library');
+mongoose.connect('mongodb://localhost/library_test');
 
 var db = mongoose.connection;
 db.on('error', function(msg) {
