@@ -14,6 +14,10 @@ db.once('open', function() {
 
 var Books = require('../models/books')
 
+router.get('/', function(req, res, next) {
+	re.json({status: "success"});
+});
+
 /* GET home page. */
 router.get('/list', function(req, res, next) {
 	Books.find({}).exec(function(err, books) {
