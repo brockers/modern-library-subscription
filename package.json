@@ -13,7 +13,7 @@
     "start": "node app.js",
     "test": "nyc mocha --timeout=3000 --exit",
     "db:rebuild": "mongoimport --db library_test --collection books --drop --file booklist.json",
-		"dev": "nodemon app.js",
+    "dev": "nodemon app.js",
     "lint": "eslint **/*.js"
   },
   "dependencies": {
