@@ -33,7 +33,7 @@ dotenv.load({ path: '.env.example' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
-const booksController = require('./routes/books');
+const booksRoutes = require('./routes/books');
 const contactController = require('./controllers/contact');
 
 /**
@@ -96,31 +96,32 @@ app.use((req, res, next) => {
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 app.disable('x-powered-by');
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  next();
-});
-app.use((req, res, next) => {
-  // After successful login, redirect back to the intended page
-  if (!req.user &&
-    req.path !== '/login' &&
-    req.path !== '/signup' &&
-    req.path !== '/books' &&
-    !req.path.match(/^\/auth/) &&
-    !req.path.match(/\./)) {
-    req.session.returnTo = req.originalUrl;
-  } else if (req.user &&
-    (req.path === '/account' || req.path.match(/^\/api/))) {
-    req.session.returnTo = req.originalUrl;
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   res.locals.user = req.user;
+//   next();
+// });
+// app.use((req, res, next) => {
+//   // After successful login, redirect back to the intended page
+//   if (!req.user &&
+//     req.path !== '/login' &&
+//     req.path !== '/signup' &&
+//     req.path !== '/books' &&
+//     !req.path.match(/^\/auth/) &&
+//     !req.path.match(/\./)) {
+//     req.session.returnTo = req.originalUrl;
+//   } else if (req.user &&
+//     (req.path === '/account' || req.path.match(/^\/api/))) {
+//     req.session.returnTo = req.originalUrl;
+//   }
+//   next();
+// });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
 
 /**
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/books', booksController)
 app.get('/grayscale', homeController.grayscale);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -143,7 +144,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
  * API examples routes.
  */
 // app.get('/api', apiController.getApi);
-app.get('/books', booksController)
 app.get('/api/lastfm', apiController.getLastfm);
 app.get('/api/nyt', apiController.getNewYorkTimes);
 app.get('/api/aviary', apiController.getAviary);

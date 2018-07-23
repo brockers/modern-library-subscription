@@ -16,15 +16,14 @@ db.once('open', function() {
 
 
 router.get('/', function(req, res, next) {
-	res.json({status: "success"});
+	re.json({status: "success"});
 });
 
 /* GET home page. */
 router.get('/list', function(req, res, next) {
-	res.json({status:"Someting"})
-	// Books.find({}).exec(function(err, books) {
-	// 	res.json({books: books});
-	// });
+	Books.find({}).exec(function(err, books) {
+		res.json({books: books});
+	});
 });
 
 router.post('/add/:name/:auth', function(req, res, next) {
