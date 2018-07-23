@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var Books = require('../models/books')
+
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/library_test');
 
@@ -12,17 +14,17 @@ db.once('open', function() {
 	console.log('Mongoose connection established');
 });
 
-var Books = require('../models/books')
 
 router.get('/', function(req, res, next) {
-	re.json({status: "success"});
+	res.json({status: "success"});
 });
 
 /* GET home page. */
 router.get('/list', function(req, res, next) {
-	Books.find({}).exec(function(err, books) {
-		res.json({books: books});
-	});
+	res.json({status:"Someting"})
+	// Books.find({}).exec(function(err, books) {
+	// 	res.json({books: books});
+	// });
 });
 
 router.post('/add/:name/:auth', function(req, res, next) {

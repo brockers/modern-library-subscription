@@ -105,6 +105,7 @@ app.use((req, res, next) => {
   if (!req.user &&
     req.path !== '/login' &&
     req.path !== '/signup' &&
+    req.path !== '/books' &&
     !req.path.match(/^\/auth/) &&
     !req.path.match(/\./)) {
     req.session.returnTo = req.originalUrl;
@@ -142,7 +143,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
  * API examples routes.
  */
 // app.get('/api', apiController.getApi);
-app.get('/api/books', booksController)
+app.get('/books', booksController)
 app.get('/api/lastfm', apiController.getLastfm);
 app.get('/api/nyt', apiController.getNewYorkTimes);
 app.get('/api/aviary', apiController.getAviary);
